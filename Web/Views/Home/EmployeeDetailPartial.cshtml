@@ -1,0 +1,50 @@
+﻿
+@model Data.Employees
+@inject IEmploymentTypeService employmentTypeService
+
+<ejs-dialog id="dialog" created="created=function(){this.show()}" showCloseIcon="true" closeOnEscape="true" width="700px" header="@(Model?.EmployeeName??"New Employee")" close="load">
+    <e-content-template>
+        <asp-form action="@Url.Action("AddEditEmployeePartial",new { Id=Model?.Id})" on-success="onsuccess">
+            <div class="row margin-top-10px">
+                <div class="col-lg">
+                    <ejs-textbox ejs-for="EmployeeName" id="EmployeeName" placeholder="EmployeeName" floatLabelType="Always"></ejs-textbox>
+                    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row margin-top-10px">
+                <div class="col-lg">
+                    <ejs-datepicker ejs-for="BirthDate" id="BirthDate" placeholder="BirthDate" floatLabelType="Always"></ejs-datepicker>
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row margin-top-10px">
+                <div class="col-lg">
+                    <ejs-textbox ejs-for="TIN" id="TIN" placeholder="TIN" floatLabelType="Always"></ejs-textbox>
+                    <span asp-validation-for="TIN" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row margin-top-10px">
+                <div class="col-lg">
+                    <ejs-combobox ejs-for="Type" id="Type" placeholder="Type" floatLabelType="Always" dataSource="@employmentTypeService.GetEmploymentTypes()">
+                        <e-combobox-fields value="EmploymentType" text="EmploymentType">
+
+                        </e-combobox-fields>
+                    </ejs-combobox>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row margin-top-10px">
+                <div class="col-lg">
+                    <ejs-numerictextbox id="Salary" ejs-for="Salary" placeholder="Salary" floatLabelType="Always"></ejs-numerictextbox>
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <button class="btn btn-info" type="submit">Submit</button>
+                </div>
+            </div>
+        </asp-form>
+    </e-content-template>
+</ejs-dialog>
+<ejs-scripts></ejs-scripts>

@@ -1,0 +1,34 @@
+﻿@model System.Collections.Generic.List<Data.Employees>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="#" onclick="showAddEditDialog('')"># New</a>
+
+            </th>
+            <th>Name</th>
+            <th>BirthDate</th>
+            <th>TIN</th>
+            <th>Salary</th>
+            <th>Employee Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+        <tr>
+            <td>
+                <a href="#" onclick="showAddEditDialog('@i.Id')">Edit</a>
+                <a href="#" onclick="deleteEmployee('@i.Id')">Delete</a>
+                <a href="#" onclick="calculatePayroll('@i.Id')">Calculate Payroll</a>
+            </td>
+            <td>@i.EmployeeName</td>
+            <td>@i.BirthDate.ToShortDateString()</td>
+            <td>@i.TIN</td>
+            <td>@i.Salary?.ToString("n2")</td>
+            <td>@i.Type</td>
+        </tr>
+        }
+    </tbody>
+</table>

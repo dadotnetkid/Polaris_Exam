@@ -1,0 +1,35 @@
+﻿@model Services.ViewModels.EmployeeViewModel
+
+<ejs-dialog id="dialog" created="created=function(){this.show()}" showCloseIcon="true" closeOnEscape="true" width="700px" header="@(Model?.Employees.EmployeeName)" close="load">
+    <e-content-template>
+        <asp-form action="@Url.Action("CalculatePayrollPartial",new { EmployeeId=Model?.Employees.Id})" on-success="onsuccess" method-type="POST">
+          @if (Model.Employees.Type == "Regular")
+          {
+              <div class="row margin-top-10px">
+                  <div class="col-lg">
+                      <ejs-numerictextbox ejs-for="Payrolls.DaysAbsent" id="DaysAbsent" placeholder="Days Absent" floatLabelType="Always"> </ejs-numerictextbox>
+                  </div>
+              </div>
+          }
+          @if (Model.Employees.Type == "Contractual")
+          {
+              <div class="row margin-top-10px">
+                  <div class="col-lg">
+                      <ejs-numerictextbox ejs-for="Payrolls.DaysPresent" id="DaysPresent" placeholder="Days Present" floatLabelType="Always"> </ejs-numerictextbox>
+                  </div>
+              </div>
+          }
+          <div class="row margin-top-10px">
+              <div class="col-lg">
+                  <ejs-numerictextbox id="GrandTotal" readonly="true" ejs-for="Payrolls.GrandTotal"placeholder="Grand Total" floatLabelType="Always"> </ejs-numerictextbox>
+              </div>
+          </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <button class="btn btn-info" type="submit">Calculate</button>
+                </div>
+            </div>
+        </asp-form>
+    </e-content-template>
+</ejs-dialog>
+<ejs-scripts></ejs-scripts>
